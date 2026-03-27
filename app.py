@@ -36,3 +36,16 @@ with col1:
         'lon': [lon_input]
     })
     st.map(map_data, zoom=14)
+
+with col2:
+    st.header("Call Transcript")
+    st.text_area(
+        "Raw Audio Text",
+        "Help! There is a bad car crash on the main road near Thammasat University. Two cars hit each other and someone is bleeding. We need an ambulance right away!",
+        height=200
+    )
+    
+    st.divider()
+
+    if st.button("Confirm Details & Dispatch Teams", type="primary", use_container_width=True):
+        st.success(f"Dispatching ER units to {address_input} ({lat_input}, {lon_input}).")
