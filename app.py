@@ -10,3 +10,29 @@ EXACT_LAT = 14.0690
 EXACT_LON = 100.6050
 INCIDENT_TYPE = "Vehicle Collision"
 SEVERITY = "High (2 ER Units Recommended)"
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.header("AI Analysis (Editable)")
+    st.info("Operators can adjust the AI's findings before dispatching.")
+
+    address_input = st.text_input("**Location (Address):**", value=EXTRACTED_ADDRESS)
+    coord_col1, coord_col2 = st.columns(2)
+    with coord_col1:
+        lat_input = st.number_input("**Latitude:**", value=EXACT_LAT, format="%.5f")
+    with coord_col2:
+        lon_input = st.number_input("**Longitude:**", value=EXACT_LON, format="%.5f")
+        
+    type_input = st.text_input("**Incident Type:**", value=INCIDENT_TYPE)
+    severity_input = st.text_input("**Severity Level:**", value=SEVERITY)
+    
+    st.divider()
+    
+    st.header("Dispatch Map")
+    st.caption(f"Pin drop at Lat: {lat_input}, Lon: {lon_input}")
+    map_data = pd.DataFrame({
+        'lat': [lat_input], 
+        'lon': [lon_input]
+    })
+    st.map(map_data, zoom=14)
