@@ -6,7 +6,7 @@ st.set_page_config(layout="wide", page_title="ER-Helper")
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Go to:", ["Live Dispatch", "Dispatch History"])
 
-# MOCK DATABASE
+# MOCK DATABASE 
 mock_database = pd.DataFrame([
     {
         "Timestamp": "2026-03-27 10:15 AM",
@@ -76,3 +76,18 @@ if page == "Live Dispatch":
 
         if st.button("Confirm Details & Dispatch Teams", type="primary", use_container_width=True):
             st.success(f"Dispatching ER units to {address_input} ({lat_input}, {lon_input}).")
+
+elif page == "Dispatch History":
+    st.title("Dispatch History")
+    
+    st.dataframe(mock_database, use_container_width=True, hide_index=True)
+    
+    st.divider()
+    
+    st.subheader("Detailed Incident Logs")
+    for index, row in mock_database.iterrows():
+        with st.expander(f"{row['Timestamp']} - {row['Type']} at {row['Address']}"):
+            st.write(f"**Exact Coordinates:** {row['Lat']}, {row['Lon']}")
+            st.write(f"**Severity:** {row['Severity']}")
+            st.write("**Call Transcript:**")
+            st.info(row['Transcript'])
