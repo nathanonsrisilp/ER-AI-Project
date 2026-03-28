@@ -1,3 +1,4 @@
+import datetime
 import streamlit as st
 import pandas as pd
 import requests
@@ -63,30 +64,48 @@ if page == "Live Dispatch":
 
     with col2:
         st.header("Call Transcript")
-        st.text_area(
+        
+        audio_value = st.audio_input("Record Live Dispatch Audio")
+        
+        transcript_text = "AI not hear anything yet (record audio above to transcribe)."
+
+        if audio_value is not None:
+            with st.spinner("Transcribing audio..."):
+                files = {"file": ("dispatch_audio.wav", audio_value, "audio/wav")}
+                
+                try:
+                    res = requests.post(f"{API_URL}/transcribe", files=files)
+                    if res.status_code == 200:
+                        transcript_text = res.json().get("transcript", "")
+                        st.success("Transcription complete!")
+                    else:
+                        st.error("Failed to transcribe audio.")
+                except Exception as e:
+                    st.error(f"Could not connect to API: {e}")
+
+        final_transcript = st.text_area(
             "Raw Audio Text",
-            "AI not hear anything yet(don't forget to connect audio text here!)",
+            value=transcript_text,
             height=200
         )
         
         st.divider()
 
-        response_input = st.text_area("**Emergency Response**", "Input what resoucre have been used to response the incident", height=100)
+        response_input = st.text_area("**Emergency Response**", "Input what resources have been used...", height=100)
 
         if st.button("Confirm Details & Dispatch Teams", type="primary", use_container_width=True):
             payload = {
-                "Timestamp": "2026-03-28",
+                "Timestamp": datetime.now,
                 "Address": address_input,
                 "Lat": lat_input,
                 "Lon": lon_input,
                 "Type": type_input,
                 "Severity": severity_input,
-                "Transcript": "Live dispatch",
+                "Transcript": final_transcript,
                 "Response": response_input
             }
 
             requests.post(f"{API_URL}/dispatches", json=payload)
-
             st.success(f"Dispatch stored and sent to {address_input}")
 
 elif page == "Dispatch History":
