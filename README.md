@@ -170,3 +170,52 @@ Before dispatch:
 - Can confirm, edit, or trigger dispatch
 
 This ensures both automation and reliability.
+
+## AI Engineering Approach
+
+Beyond basic AI usage, this project focuses on the engineering of how AI is applied within a real-world system.
+
+### 1. Prompt Engineering
+
+The system is designed using structured prompts to guide the AI model in extracting relevant emergency information.
+
+- Inputs are formatted to highlight key details (incident, location, severity)
+- Prompts are optimized to produce consistent and structured outputs
+- The AI is guided to return standardized fields instead of free-form text
+
+### 2. Category & Format Engineering
+
+To ensure reliability, the system enforces predefined categories and output formats:
+
+- Incident Types (e.g., Fire, Accident, Medical Emergency)
+- Severity Levels (Low, Medium, High)
+- Structured response templates for consistency
+
+This reduces ambiguity and improves downstream processing (e.g., dispatch decisions).
+
+### 3. AI-Assisted Idea Generation
+
+AI is also used as a support tool during development:
+
+- Suggesting improvements to system design
+- Assisting in defining workflows and architecture
+- Helping refine emergency classification logic
+
+### 4. Iterative Improvement
+
+The system is designed to be continuously improved:
+
+- Reviewing outputs to refine prompts
+- Adjusting extraction logic based on real examples
+- Enhancing accuracy and confidence scoring over time
+
+This reflects an engineering approach where AI is not static, but optimized through iteration.
+
+### 5. Human + AI Collaboration
+
+Rather than replacing human decision-making, the system integrates:
+
+- AI for speed and automation  
+- Human operators for validation and control  
+
+This hybrid approach ensures both efficiency and reliability in emergency scenarios.
