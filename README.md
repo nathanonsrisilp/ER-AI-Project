@@ -83,11 +83,13 @@ The Telegram bot is implemented using:
   
 ### Demo
 <img width="956" height="862" alt="Screenshot 2569-03-28 at 15 03 31 1" src="https://github.com/user-attachments/assets/52812256-02e2-47b1-8b28-252be1c634be" />
+
 **Computer Version (Operator Interface)**  
 This interface represents the call center or operator-side system. It is used to review incoming emergency reports, verify AI-generated information, and manage the dispatch process. Operators can confirm, edit, or initiate response actions based on the structured data.
 
 ![2569-03-28 20 18 51](https://github.com/user-attachments/assets/e1679876-8dc0-4af5-b82c-c79976517ae1)
 ![2569-03-28 20 18 35](https://github.com/user-attachments/assets/579de3fa-0eff-4c20-bf04-943b877d1fc0)
+
 **Mobile Version (User Interface via Telegram)**  
 This interface allows users to report emergencies directly from their mobile devices. Users can send text messages, voice notes, or share their location. The system automatically processes the input, transcribes voice messages, and generates a structured emergency report in real time.
 
