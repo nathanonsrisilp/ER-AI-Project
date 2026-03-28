@@ -94,4 +94,79 @@ This interface represents the call center or operator-side system. It is used to
 **Mobile Version (User Interface via Telegram)**  
 This interface allows users to report emergencies directly from their mobile devices. Users can send text messages, voice notes, or share their location. The system automatically processes the input, transcribes voice messages, and generates a structured emergency report in real time.
 
+## IoT Integration (ESP32 Alert System)
 
+In addition to the AI-based emergency intake system, an IoT component was implemented using an ESP32 microcontroller.
+
+### Concept
+
+The ESP32 acts as a real-time alert device that responds to incoming emergency events processed by the system.
+
+- When a new emergency report is generated and confirmed:
+  - A signal is sent to the ESP32
+  - The ESP32 triggers a visual alert (LED ON/OFF)
+
+### Purpose
+
+This demonstrates how digital emergency data can be translated into physical actions, enabling:
+
+- Real-time alert systems in control rooms  
+- Visual emergency indicators  
+- Integration with hardware-based response systems  
+
+### System Flow Extension
+```
+Telegram User
+↓
+AI Processing (Transcription + Classification)
+↓
+Emergency Report Generated
+↓
+Dispatch Signal
+↓
+ESP32 Trigger
+↓
+LED Alert (ON/OFF)
+```
+
+### Technologies Used
+
+- ESP32 Microcontroller  
+- Arduino Framework  
+- Serial / API communication with backend
+
+- ## AI Processing Concept
+
+The system uses AI to transform unstructured user input into structured emergency data.
+
+### 1. Voice-to-Text (Speech Recognition)
+
+- Voice messages from Telegram are converted into text using AI transcription
+- This enables hands-free emergency reporting
+
+### 2. Natural Language Processing (LLM)
+
+The transcribed or typed input is analyzed using a Large Language Model (LLM) to extract:
+
+- Incident Type (e.g., fire, accident)
+- Number of injured
+- Location
+- Severity level
+- Confidence score
+
+### 3. Structured Output
+
+The system converts natural language into a standardized emergency report format:
+Incident Type: Fire
+Injured: 9
+Location: Near SIIT
+Severity: High
+Confidence: 0.85
+### 4. Human-in-the-Loop Verification
+
+Before dispatch:
+
+- The operator reviews the AI-generated report
+- Can confirm, edit, or trigger dispatch
+
+This ensures both automation and reliability.
