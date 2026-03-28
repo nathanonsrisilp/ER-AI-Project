@@ -1,11 +1,11 @@
 # ER-Helper: AI-Powered Emergency Dispatch Assistant
 
 ## Team Members
-Member #1: Celine Helene Margrethe Amandine Johnsen
-Member #2: Nathanon Srisilp
-Member #3: Nutt Sittichaiopas
-Member #4: Wasin Promjun
-Member #5: Siranut Usawasutsakorn
+**Member #1: Celine Helene Margrethe Amandine Johnsen
+**Member #2: Nathanon Srisilp
+**Member #3: Nutt Sittichaiopas
+**Member #4: Wasin Promjun
+**Member #5: Siranut Usawasutsakorn
 
 ## About the Project
 Emergency Responder (ER) Call Centers currently use a lot of time gaining information directly from the caller. During high stress situations, this manual data entry can causes delays, making the caller feel that the ER took too long to respond and losing critical time to provide data for the call center. 
