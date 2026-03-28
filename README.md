@@ -49,19 +49,22 @@ Severity: High
 Confidence: 0.85
 
 ### Workflow
+```
 User (Telegram)
-↓
+   ↓
 Voice / Text Input
-↓
+   ↓
 Speech-to-Text (if voice)
-↓
+   ↓
 AI Processing (LLM)
-↓
+   ↓
 Structured Emergency Report
-↓
+   ↓
 Operator Verification (Confirm / Edit)
-↓
+   ↓
 Dispatch
+```
+
 ### Implementation
 
 The Telegram bot is implemented using:
