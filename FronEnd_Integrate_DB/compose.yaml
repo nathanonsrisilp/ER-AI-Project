@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  api:
+    build: ./FrontEnd_API
+    volumes:
+    - ./FrontEnd_API:/app
+    container_name: FrontEnd_API
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - DB_NAME=${DB_NAME}
+      - API_HOST=${API_HOST}
+      - API_PORT=${API_PORT}
+
+  streamlit:
+    build: ./FrontEnd
+    volumes:
+    - ./FrontEnd:/app
+    container_name: FrontEnd
+    ports:
+      - "${STREAMLIT_PORT}:${STREAMLIT_PORT}"
+    depends_on:
+      - api
+    environment:
+      - API_URL=${API_URL}
+      - STREAMLIT_PORT=${STREAMLIT_PORT}
+
+volumes:
+  mongo_data:
