@@ -84,6 +84,7 @@ The Telegram bot is implemented using:
 ### Demo
 <img width="956" height="862" alt="Screenshot 2569-03-28 at 15 03 31 1" src="https://github.com/user-attachments/assets/52812256-02e2-47b1-8b28-252be1c634be" />
 
+
 **Computer Version (Operator Interface)**  
 This interface represents the call center or operator-side system. It is used to review incoming emergency reports, verify AI-generated information, and manage the dispatch process. Operators can confirm, edit, or initiate response actions based on the structured data.
 
