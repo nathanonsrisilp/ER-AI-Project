@@ -27,3 +27,50 @@ Current UI page
 
 <img width="1902" height="911" alt="Screenshot 2026-03-27 201931" src="https://github.com/user-attachments/assets/622a2655-cdb4-4251-a968-a0e0c1da9d4f" />
 
+## Telegram Integration Module Aspect
+
+To enhance real-time emergency intake, we developed a Telegram-based interface that allows users to report incidents using text, voice, and location sharing.
+
+### Features
+
+- Voice message input with automatic transcription
+- AI-powered emergency classification
+- GPS location integration
+- Structured emergency report generation
+- Human-in-the-loop verification (Confirm / Edit / Dispatch)
+
+### Example Output
+🚑 EMERGENCY REPORT
+
+Incident Type: Fire
+Injured: 9
+Location: Near SIIT
+Severity: High
+Confidence: 0.85
+
+### Workflow
+User (Telegram)
+↓
+Voice / Text Input
+↓
+Speech-to-Text (if voice)
+↓
+AI Processing (LLM)
+↓
+Structured Emergency Report
+↓
+Operator Verification (Confirm / Edit)
+↓
+Dispatch
+### Implementation
+
+The Telegram bot is implemented using:
+
+- `python-telegram-bot` for bot interaction
+- OpenAI API for transcription and analysis
+- Async event handling for real-time responsiveness
+
+  
+### Demo
+###<img width="956" height="862" alt="Screenshot 2569-03-28 at 15 03 31 1" src="https://github.com/user-attachments/assets/52812256-02e2-47b1-8b28-252be1c634be" />
+
