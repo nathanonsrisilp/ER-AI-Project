@@ -270,3 +270,43 @@ Therefore in a quick summary we can state that the dashboard bridges the gap bet
 - Set up Docker for containerized deployment  
 - Integrated the database with the dashboard for real-time and historical data management  
 - Enabled seamless data flow between backend, storage, and UI components  
+
+## Real-Time Audio Streaming API
+
+To support live emergency reporting, a real-time audio streaming API was developed to capture and transmit microphone input directly to the backend system.
+
+### Overview
+
+This component enables continuous audio capture from the user’s device and streams it to the Dockerized backend, where it can be processed for transcription and AI analysis.
+
+### Key Features
+
+- **Live Microphone Capture**
+  - Streams audio directly from the user’s computer microphone  
+
+- **Real-Time Transmission**
+  - Sends audio data to the backend with minimal latency  
+
+- **Docker Integration**
+  - Connects seamlessly with containerized backend services  
+
+- **AI Pipeline Compatibility**
+  - Supports downstream processing including speech-to-text and emergency classification  
+
+### Role in System
+```
+User Microphone Input
+↓
+Audio Streaming API
+↓
+Docker Backend
+↓
+Speech-to-Text
+↓
+AI Processing
+↓
+Structured Emergency Report
+```
+### Purpose
+
+This module enables hands-free emergency reporting and improves response speed by allowing users to communicate incidents through live voice input rather than manual typing.
