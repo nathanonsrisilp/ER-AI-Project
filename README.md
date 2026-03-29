@@ -275,6 +275,21 @@ Rather than replacing human decision-making, the system integrates:
 
 This hybrid approach ensures both efficiency and reliability in emergency scenarios.
 
+## System Architecture
+```
+Telegram User  
+↓  
+Telegram Bot (Python)  
+↓  
+OpenAI API (LLM + Speech-to-Text)  
+↓  
+Flask Backend  
+↓  
+├── MongoDB  
+├── Streamlit Dashboard  
+└── ESP32 Device  
+```
+
 ## Interactive Dashboard (Streamlit)
 
 An interactive and user-friendly dashboard was developed using Streamlit to support real-time monitoring and historical analysis of emergency cases.
