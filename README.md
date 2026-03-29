@@ -308,5 +308,4 @@ AI Processing
 Structured Emergency Report
 ```
 ### Purpose
-
 This module enables hands-free emergency reporting and improves response speed by allowing users to communicate incidents through live voice input rather than manual typing.
