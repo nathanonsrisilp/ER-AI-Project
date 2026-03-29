@@ -262,3 +262,11 @@ AI Processing
 Dispatch Decision
 ```
 Therefore in a quick summary we can state that the dashboard bridges the gap between automated AI processing and human decision-making, ensuring that all emergency reports are verified and actionable before dispatch.
+
+## Backend & Infrastructure
+**Backend Infrastructure & Deployment**
+
+- Designed and configured backend services  
+- Set up Docker for containerized deployment  
+- Integrated the database with the dashboard for real-time and historical data management  
+- Enabled seamless data flow between backend, storage, and UI components  
