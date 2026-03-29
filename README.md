@@ -46,6 +46,20 @@ To enhance real-time emergency intake, we developed a Telegram-based interface t
 - Structured emergency report generation
 - Human-in-the-loop verification (Confirm / Edit / Dispatch)
 
+### Operator Verification (Inline Buttons)
+
+The Telegram bot includes interactive buttons:
+
+- ✅ Confirm → verifies emergency  
+- ❌ Reject → cancels report  
+
+These buttons trigger backend state updates in real-time.
+
+### Result
+
+- Confirm → state = confirmed  
+- Reject → state = idle  
+
 ### Example Output
 🚑 EMERGENCY REPORT
 
@@ -94,6 +108,39 @@ This interface represents the call center or operator-side system. It is used to
 **Mobile Version (User Interface via Telegram)**  
 This interface allows users to report emergencies directly from their mobile devices. Users can send text messages, voice notes, or share their location. The system automatically processes the input, transcribes voice messages, and generates a structured emergency report in real time.
 
+## Real-Time Emergency Status System
+
+To enable real-time communication between AI, operator, and IoT device, a centralized status system was implemented.
+
+### States
+- idle → no emergency  
+- incoming → new emergency detected  
+- confirmed → operator verified  
+
+### API Endpoints
+
+GET /api/alert-status → returns current state  
+GET /api/set-status?state=confirmed → updates state  
+
+### Workflow
+```
+User sends report  
+↓  
+State = incoming  
+↓  
+Operator confirms  
+↓  
+State = confirmed  
+↓  
+System auto resets → idle  
+```
+
+### Purpose
+
+- Synchronize system in real-time  
+- Trigger IoT instantly  
+- Keep logic simple and scalable  
+
 ## IoT Integration (ESP32 Alert System)
 
 In addition to the AI-based emergency intake system, an IoT component was implemented using an ESP32 microcontroller.
@@ -105,6 +152,14 @@ The ESP32 acts as a real-time alert device that responds to incoming emergency e
 - When a new emergency report is generated and confirmed:
   - A signal is sent to the ESP32
   - The ESP32 triggers a visual alert (LED ON/OFF)
+ 
+### ESP32 State Behavior
+
+| State      | ESP32 Behavior        |
+|------------|---------------------|
+| idle       | LED OFF             |
+| incoming   | LED BLINKING FAST   |
+| confirmed  | LED SOLID ON        |
 
 ### Purpose
 
