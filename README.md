@@ -46,6 +46,20 @@ To enhance real-time emergency intake, we developed a Telegram-based interface t
 - Structured emergency report generation
 - Human-in-the-loop verification (Confirm / Edit / Dispatch)
 
+### Operator Verification (Inline Buttons)
+
+The Telegram bot includes interactive buttons:
+
+- ✅ Confirm → verifies emergency  
+- ❌ Reject → cancels report  
+
+These buttons trigger backend state updates in real-time.
+
+### Result
+
+- Confirm → state = confirmed  
+- Reject → state = idle  
+
 ### Example Output
 🚑 EMERGENCY REPORT
 
@@ -94,6 +108,39 @@ This interface represents the call center or operator-side system. It is used to
 **Mobile Version (User Interface via Telegram)**  
 This interface allows users to report emergencies directly from their mobile devices. Users can send text messages, voice notes, or share their location. The system automatically processes the input, transcribes voice messages, and generates a structured emergency report in real time.
 
+## Real-Time Emergency Status System
+
+To enable real-time communication between AI, operator, and IoT device, a centralized status system was implemented.
+
+### States
+- idle → no emergency  
+- incoming → new emergency detected  
+- confirmed → operator verified  
+
+### API Endpoints
+
+GET /api/alert-status → returns current state  
+GET /api/set-status?state=confirmed → updates state  
+
+### Workflow
+```
+User sends report  
+↓  
+State = incoming  
+↓  
+Operator confirms  
+↓  
+State = confirmed  
+↓  
+System auto resets → idle  
+```
+
+### Purpose
+
+- Synchronize system in real-time  
+- Trigger IoT instantly  
+- Keep logic simple and scalable  
+
 ## IoT Integration (ESP32 Alert System)
 
 In addition to the AI-based emergency intake system, an IoT component was implemented using an ESP32 microcontroller.
@@ -105,6 +152,14 @@ The ESP32 acts as a real-time alert device that responds to incoming emergency e
 - When a new emergency report is generated and confirmed:
   - A signal is sent to the ESP32
   - The ESP32 triggers a visual alert (LED ON/OFF)
+ 
+### ESP32 State Behavior
+
+| State      | ESP32 Behavior        |
+|------------|---------------------|
+| idle       | LED OFF             |
+| incoming   | LED BLINKING FAST   |
+| confirmed  | LED SOLID ON        |
 
 ### Purpose
 
@@ -220,6 +275,21 @@ Rather than replacing human decision-making, the system integrates:
 
 This hybrid approach ensures both efficiency and reliability in emergency scenarios.
 
+## System Architecture
+```
+Telegram User  
+↓  
+Telegram Bot (Python)  
+↓  
+OpenAI API (LLM + Speech-to-Text)  
+↓  
+Flask Backend  
+↓  
+├── MongoDB  
+├── Streamlit Dashboard  
+└── ESP32 Device  
+```
+
 ## Interactive Dashboard (Streamlit)
 
 An interactive and user-friendly dashboard was developed using Streamlit to support real-time monitoring and historical analysis of emergency cases.
@@ -269,4 +339,21 @@ Therefore in a quick summary we can state that the dashboard bridges the gap bet
 - Designed and configured backend services  
 - Set up Docker for containerized deployment  
 - Integrated the database with the dashboard for real-time and historical data management  
-- Enabled seamless data flow between backend, storage, and UI components  
+- Enabled seamless data flow between backend, storage, and UI components
+
+## How to Run
+
+### 1. Start Backend
+python backend.py
+
+### 2. Start Telegram Bot
+python telegram_bot/bot.py
+
+### 3. Open API
+http://localhost:5001/api/alert-status
+
+### 4. Use Telegram
+- Send emergency message  
+- Click Confirm  
+
+System will update in real-time
