@@ -339,4 +339,21 @@ Therefore in a quick summary we can state that the dashboard bridges the gap bet
 - Designed and configured backend services  
 - Set up Docker for containerized deployment  
 - Integrated the database with the dashboard for real-time and historical data management  
-- Enabled seamless data flow between backend, storage, and UI components  
+- Enabled seamless data flow between backend, storage, and UI components
+
+## How to Run
+
+### 1. Start Backend
+python backend.py
+
+### 2. Start Telegram Bot
+python telegram_bot/bot.py
+
+### 3. Open API
+http://localhost:5001/api/alert-status
+
+### 4. Use Telegram
+- Send emergency message  
+- Click Confirm  
+
+System will update in real-time
