@@ -233,7 +233,7 @@ Extract the emergency details from the following report.
 
 Return ONLY in this exact format:
 Incident Type: <type>
-Injured: <number or unknown>
+Injured: Known <known number> - Potential <potential number or unknown>
 Location: <location or unknown>
 Severity: <low/medium/high>
 Confidence: <0.00-1.00>
