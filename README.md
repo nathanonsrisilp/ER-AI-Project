@@ -47,7 +47,7 @@ To enhance real-time emergency intake, we developed a Telegram-based interface t
 - Human-in-the-loop verification (Confirm / Edit / Dispatch)
 
 ### Example Output
-🚑 EMERGENCY REPORT
+EMERGENCY REPORT
 
 Incident Type: Fire
 Injured: 9
