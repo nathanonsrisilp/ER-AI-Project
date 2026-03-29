@@ -49,7 +49,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def report(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "You are a world-class trained emergency response expert.\n"
-        "Make a report on the emergency."
+        "Make a report on the emergency.\n"
         "Example: Fire, 3 injured, near SIIT."
     )
 
