@@ -357,3 +357,11 @@ http://localhost:5001/api/alert-status
 - Click Confirm  
 
 System will update in real-time
+
+## Demo Video - Live
+Located in files above.
+
+https://github.com/user-attachments/assets/18911c49-7ba2-4fc2-820c-420f94d7fa2b
+
+
+[▶️ Watch Demo Video]
