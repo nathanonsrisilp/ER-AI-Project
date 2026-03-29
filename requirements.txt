@@ -1,0 +1,9 @@
+flask
+flask-cors
+pymongo
+python-dotenv
+requests
+streamlit
+pandas
+openai
+python-telegram-bot
