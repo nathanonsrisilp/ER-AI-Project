@@ -1,65 +1,68 @@
 import os
 from datetime import datetime
+
 from bson import ObjectId
+from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
-from dotenv import load_dotenv
 
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
-DB_NAME = os.getenv("DB_NAME", "er_helper_db")
-COLLECTION_NAME = os.getenv("COLLECTION_NAME", "reports")
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://admin:password@localhost:27017/")
+DB_NAME = os.getenv("DB_NAME", "ftm_rssi_log")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME", "ftm_rssi_col")
 
-client = MongoClient("mongodb://admin:password@localhost:27017")
-db = client["ftm_rssi_log"]
-collection = db["ftm_rssi_col"]
+client = MongoClient(MONGO_URI)
+db = client[DB_NAME]
+collection = db[COLLECTION_NAME]
+
+current_state = "idle"
 
 
 def serialize_report(doc):
     return {
         "id": str(doc["_id"]),
-        "incident_type": doc.get("incident_type", "Unknown"),
-        "injured": doc.get("injured", "unknown"),
-        "location": doc.get("location", "unknown"),
-        "severity": doc.get("severity", "medium"),
-        "confidence": doc.get("confidence", "0.00"),
-        "transcript": doc.get("transcript", ""),
+        "incident_type": doc.get("incident_type"),
+        "injured": doc.get("injured"),
+        "location": doc.get("location"),
+        "severity": doc.get("severity"),
+        "confidence": doc.get("confidence"),
+        "transcript": doc.get("transcript"),
         "gps_lat": doc.get("gps_lat"),
         "gps_lon": doc.get("gps_lon"),
-        "status": doc.get("status", "pending"),
-        "source": doc.get("source", "telegram"),
+        "status": doc.get("status"),
+        "source": doc.get("source"),
         "created_at": doc.get("created_at"),
         "updated_at": doc.get("updated_at"),
     }
 
 
-@app.route("/")
-def home():
-    return jsonify({"message": "ER-Helper backend is running"})
-
-
 @app.route("/api/reports", methods=["POST"])
 def create_report():
-    data = request.json or {}
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No JSON payload provided"}), 400
+
+    now = datetime.utcnow().isoformat()
 
     report = {
-        "incident_type": data.get("incident_type", "Unknown"),
+        "incident_type": data.get("incident_type", "unknown"),
         "injured": data.get("injured", "unknown"),
         "location": data.get("location", "unknown"),
-        "severity": data.get("severity", "medium"),
-        "confidence": data.get("confidence", "0.00"),
+        "severity": data.get("severity", "unknown"),
+        "confidence": data.get("confidence", "unknown"),
         "transcript": data.get("transcript", ""),
         "gps_lat": data.get("gps_lat"),
         "gps_lon": data.get("gps_lon"),
         "status": data.get("status", "pending"),
-        "source": data.get("source", "telegram"),
-        "created_at": datetime.utcnow().isoformat(),
-        "updated_at": datetime.utcnow().isoformat(),
+        "source": data.get("source", "unknown"),
+        "created_at": now,
+        "updated_at": now,
     }
 
     result = collection.insert_one(report)
@@ -98,21 +101,31 @@ def get_report(report_id):
 
 @app.route("/api/reports/<report_id>", methods=["PUT"])
 def update_report(report_id):
-    data = request.json or {}
+    data = request.get_json()
+
+    if not data:
+        return jsonify({"error": "No JSON payload provided"}), 400
 
     update_fields = {
-        "incident_type": data.get("incident_type"),
-        "injured": data.get("injured"),
-        "location": data.get("location"),
-        "severity": data.get("severity"),
-        "confidence": data.get("confidence"),
-        "status": data.get("status"),
-        "gps_lat": data.get("gps_lat"),
-        "gps_lon": data.get("gps_lon"),
-        "updated_at": datetime.utcnow().isoformat(),
+        "updated_at": datetime.utcnow().isoformat()
     }
 
-    update_fields = {k: v for k, v in update_fields.items() if v is not None}
+    allowed_fields = [
+        "incident_type",
+        "injured",
+        "location",
+        "severity",
+        "confidence",
+        "transcript",
+        "gps_lat",
+        "gps_lon",
+        "status",
+        "source",
+    ]
+
+    for field in allowed_fields:
+        if field in data:
+            update_fields[field] = data[field]
 
     try:
         result = collection.update_one(
@@ -126,13 +139,12 @@ def update_report(report_id):
         return jsonify({"error": "Report not found"}), 404
 
     updated = collection.find_one({"_id": ObjectId(report_id)})
+
     return jsonify({
         "message": "Report updated",
         "report": serialize_report(updated)
     })
 
-
-current_state = "idle"
 
 @app.route("/api/set-status", methods=["GET"])
 def set_status_route():
@@ -140,9 +152,15 @@ def set_status_route():
     current_state = request.args.get("state", "idle")
     return jsonify({"ok": True, "state": current_state})
 
+
 @app.route("/api/alert-status", methods=["GET"])
 def alert_status():
     return jsonify({"state": current_state})
+
+
+@app.route("/")
+def home():
+    return jsonify({"message": "ER-Helper backend is running"})
 
 
 if __name__ == "__main__":
