@@ -31,11 +31,6 @@ Emergency Responder (ER) Call Centers currently use a lot of time gaining inform
 * **ER Call Center Operators:** Need to reduce time spent manually logging information.
 * **Emergency Responders:** Need GPS locations to navigate to the scene.
 
-Current UI page
-<img width="1906" height="912" alt="Screenshot 2026-03-27 201917" src="https://github.com/user-attachments/assets/baf104a8-a525-4b66-aa21-0cf130293807" />
-
-<img width="1902" height="911" alt="Screenshot 2026-03-27 201931" src="https://github.com/user-attachments/assets/622a2655-cdb4-4251-a968-a0e0c1da9d4f" />
-
 ## Telegram Integration Module Aspect
 
 To enhance real-time emergency intake, we developed a Telegram-based interface that allows users to report incidents using text, voice, and location sharing.
@@ -334,6 +329,11 @@ AI Processing
 Dispatch Decision
 ```
 Therefore in a quick summary we can state that the dashboard bridges the gap between automated AI processing and human decision-making, ensuring that all emergency reports are verified and actionable before dispatch.
+
+- ### UI Page Design
+<img width="1906" height="912" alt="Screenshot 2026-03-27 201917" src="https://github.com/user-attachments/assets/baf104a8-a525-4b66-aa21-0cf130293807" />
+
+<img width="1902" height="911" alt="Screenshot 2026-03-27 201931" src="https://github.com/user-attachments/assets/622a2655-cdb4-4251-a968-a0e0c1da9d4f" />
 
 ## Backend & Infrastructure
 **Backend Infrastructure & Deployment**
