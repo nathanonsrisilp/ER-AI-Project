@@ -18,18 +18,23 @@ Emergency Responder (ER) Call Centers currently use a lot of time gaining inform
 * **Verification Dashboard:** Instead of typing from scratch, the Call Center operator simply confirms the information or adjusts it as they see fit.
 * **Instant GPS Dispatch:** Once the operator confirms the details, the system notifies the ER and just gives the location so they can go to the destination quickly. 
 
-## System Workflow 
-1. **Intake:** The caller calls the Call Center and tells them about the incident.
-2. **AI Processing:** The system processes the audio. The LLM extracts the location, incident type, and severity.
-3. **Human in the Loop:** The Call Center operator reviews the AI-generated summary on their dashboard and confirms the data.
-4. **Dispatch:** The verified GPS location and incident details are sent directly to the ER unit's device.
-
 ## Stakeholders
 <img width="1346" height="577" alt="Screenshot 2026-03-30 114404" src="https://github.com/user-attachments/assets/4fdcb9a0-98da-44e2-8e10-3955c12d78eb" />
 
 * **Callers:** Need fast, frictionless communication during emergencies.
 * **ER Call Center Operators:** Need to reduce time spent manually logging information.
 * **Emergency Responders:** Need GPS locations to navigate to the scene.
+
+## System Workflow 
+1. **Intake:** The caller calls the Call Center and tells them about the incident.
+2. **AI Processing:** The system processes the audio. The LLM extracts the location, incident type, and severity.
+3. **Human in the Loop:** The Call Center operator reviews the AI-generated summary on their dashboard and confirms the data.
+4. **Dispatch:** The verified GPS location and incident details are sent directly to the ER unit's device.
+
+<img width="1701" height="849" alt="Screenshot 2026-03-30 113911" src="https://github.com/user-attachments/assets/d74023fa-5175-464d-b533-50916a33ed8f" />
+
+<img width="836" height="481" alt="Untitled Diagram2 drawio" src="https://github.com/user-attachments/assets/58f4c283-39b9-4b2f-863b-3f9158177938" />
+
 
 ## Telegram Integration Module Aspect
 
