@@ -25,6 +25,8 @@ Emergency Responder (ER) Call Centers currently use a lot of time gaining inform
 4. **Dispatch:** The verified GPS location and incident details are sent directly to the ER unit's device.
 
 ## Stakeholders
+<img width="1346" height="577" alt="Screenshot 2026-03-30 114404" src="https://github.com/user-attachments/assets/4fdcb9a0-98da-44e2-8e10-3955c12d78eb" />
+
 * **Callers:** Need fast, frictionless communication during emergencies.
 * **ER Call Center Operators:** Need to reduce time spent manually logging information.
 * **Emergency Responders:** Need GPS locations to navigate to the scene.
